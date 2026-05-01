@@ -1,0 +1,17 @@
+ {
+   "lspServers": {
+     "godot": {
+       "command": "godot-lsp-bridge",
+       "args": [],
+      "env": {
+        "GODOT_LSP_BRIDGE_DEBUG": "true"
+      },
+       "fileExtensions": {
+         ".gd": "GDScript",
+         ".tscn": "GD Scene",
+         ".tres": "GD Text Resource"
+       },
+       "rootUri": "minimum-lsp-project/"
+     }
+   }
+ }
