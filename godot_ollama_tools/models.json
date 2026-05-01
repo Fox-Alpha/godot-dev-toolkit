@@ -1,0 +1,988 @@
+{
+  "version": 1,
+  "single_source_of_truth": true,
+  "updated_at": "2026-04-11T21:02:36Z",
+  "markdown_output": "ollama-tooling/modellkatalog.md",
+  "run_log_dir": "ollama-tooling/runs",
+  "render_options": {
+    "table_sort": {
+      "enabled": true,
+      "fields": [
+        {
+          "path": "metrics.last_duration_ms",
+          "direction": "asc",
+          "type": "number",
+          "missing": "last"
+        },
+        {
+          "path": "name",
+          "direction": "asc",
+          "type": "string",
+          "missing": "last"
+        }
+      ]
+    }
+  },
+  "test_profiles": {
+    "smoke-csharp": {
+      "kind": "csharp",
+      "profile": "smoke",
+      "label": "C# smoke test",
+      "goal": "Schneller Load- und Syntax-Smoke-Test",
+      "prompt": "Write a minimal C# Hello World program as a single file.\nReturn plain source code only.\nDo not add explanations.\nDo not use markdown code fences.\n"
+    },
+    "function-csharp": {
+      "kind": "csharp",
+      "profile": "function",
+      "label": "C# function test",
+      "goal": "Kurzer Funktions- und Rueckgabewert-Test",
+      "prompt": "Write a minimal C# code example that defines static int SumPositive(int[] values).\nThe method must return the sum of all positive integers in the array.\nReturn plain source code only.\nDo not add explanations.\nDo not use markdown code fences.\n"
+    },
+    "strict-csharp": {
+      "kind": "csharp",
+      "profile": "strict",
+      "label": "C# strict format test",
+      "goal": "Prueft strikte Einhaltung eines knappen Ausgabeformats",
+      "prompt": "Write only a C# method with this exact signature: static bool IsEven(int value)\nReturn plain source code only.\nDo not add explanations.\nDo not use markdown code fences.\nDo not wrap the method in a class.\n"
+    },
+    "smoke-gdscript": {
+      "kind": "gdscript",
+      "profile": "smoke",
+      "label": "GDScript smoke test",
+      "goal": "Schneller Godot-4-Smoke-Test",
+      "prompt": "Write a minimal Godot 4 GDScript example that extends Node, uses typed variables, and prints Hello World in _ready().\nReturn plain source code only.\nDo not add explanations.\nDo not use markdown code fences.\nUse func _ready() -> void:.\n"
+    },
+    "function-gdscript": {
+      "kind": "gdscript",
+      "profile": "function",
+      "label": "GDScript function test",
+      "goal": "Kurzer typisierter Funktions-Test fuer Godot 4",
+      "prompt": "Write a minimal Godot 4 GDScript example that extends Node and defines func sum_positive(values: Array[int]) -> int:\nThe function must return the sum of all positive integers in the array.\nReturn plain source code only.\nDo not add explanations.\nDo not use markdown code fences.\n"
+    },
+    "strict-gdscript": {
+      "kind": "gdscript",
+      "profile": "strict",
+      "label": "GDScript strict format test",
+      "goal": "Prueft strikte Godot-4-Ausgabe ohne Zusatzstruktur",
+      "prompt": "Write only a Godot 4 GDScript function with this exact signature: func is_even(value: int) -> bool:\nReturn plain source code only.\nDo not add explanations.\nDo not use markdown code fences.\nDo not include extends or _ready.\n"
+    }
+  },
+  "status_order": [
+    "untested",
+    "ok",
+    "container_stopped",
+    "load_failed",
+    "pull_failed",
+    "timeout",
+    "syntax_issue",
+    "godot4_insufficient"
+  ],
+  "status_definitions": {
+    "untested": "Modell vorhanden, aber noch nicht bewertet",
+    "ok": "Modell geladen und einfacher Test erfolgreich",
+    "container_stopped": "Ollama war wegen gestopptem Container nicht erreichbar",
+    "load_failed": "Modell konnte nicht geladen werden",
+    "pull_failed": "Download/Import fehlgeschlagen",
+    "timeout": "Test lief in ein Timeout",
+    "syntax_issue": "Ergebnis war formal unplausibel oder fehlerhaft",
+    "godot4_insufficient": "Antwort deutet auf unzureichendes Wissen zu Godot 4 hin"
+  },
+  "groups": [
+    {
+      "id": "code_generation",
+      "title": "Code-Generierung"
+    },
+    {
+      "id": "reasoning",
+      "title": "Reasoning & Problemlosung"
+    },
+    {
+      "id": "general",
+      "title": "Allrounder & Sprache"
+    },
+    {
+      "id": "edge",
+      "title": "Ressourcenschonend / Edge"
+    },
+    {
+      "id": "specialized",
+      "title": "Spezialisiert"
+    }
+  ],
+  "models": [
+    {
+      "name": "codestral:latest",
+      "id": "0898a8b286d5",
+      "size_gb": 12.0,
+      "size_label": "12 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "pass",
+      "issues": [],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": true
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 71784,
+        "prompt_eval_count": 42,
+        "eval_count": 52,
+        "prompt_eval_duration_ns": 446495690,
+        "eval_duration_ns": 2057048651,
+        "total_duration_ns": 71768466860,
+        "load_duration_ns": 69255532970,
+        "tokens_per_second": 25.28
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-codestral_latest",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/codestral_latest.json",
+      "last_test_at": "2026-04-11T20:53:19Z"
+    },
+    {
+      "name": "deepseek-coder-v2:16b",
+      "id": "63fb193b3a9b",
+      "size_gb": 8.9,
+      "size_label": "8,9 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 49635,
+        "prompt_eval_count": 42,
+        "eval_count": 37,
+        "prompt_eval_duration_ns": 416199177,
+        "eval_duration_ns": 617155514,
+        "total_duration_ns": 49627035068,
+        "load_duration_ns": 48593285791,
+        "tokens_per_second": 59.95
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-deepseek-coder-v2_16b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/deepseek-coder-v2_16b.json",
+      "last_test_at": "2026-04-11T20:54:09Z"
+    },
+    {
+      "name": "deepcoder:14b",
+      "id": "12bdda054d23",
+      "size_gb": 9.0,
+      "size_label": "9,0 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences;contains reasoning tags",
+      "issues": [
+        "markdown_fences",
+        "reasoning_tags"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 41478,
+        "prompt_eval_count": 34,
+        "eval_count": 332,
+        "prompt_eval_duration_ns": 326155788,
+        "eval_duration_ns": 10044556449,
+        "total_duration_ns": 41459093181,
+        "load_duration_ns": 31087923957,
+        "tokens_per_second": 33.05
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-deepcoder_14b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/deepcoder_14b.json",
+      "last_test_at": "2026-04-11T20:54:51Z"
+    },
+    {
+      "name": "starcoder2:15b",
+      "id": "21ae152d49e0",
+      "size_gb": 9.1,
+      "size_label": "9,1 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "syntax_issue",
+      "last_test": "2026-04-11",
+      "notes": "empty response",
+      "issues": [
+        "empty_response"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": false,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 51783,
+        "prompt_eval_count": 45,
+        "eval_count": 1,
+        "prompt_eval_duration_ns": 246746906,
+        "eval_duration_ns": 10154630,
+        "total_duration_ns": 51765656431,
+        "load_duration_ns": 51501118432,
+        "tokens_per_second": 98.48
+      },
+      "last_kind": "csharp",
+      "last_result": "fail",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-starcoder2_15b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/starcoder2_15b.json",
+      "last_test_at": "2026-04-11T20:55:43Z"
+    },
+    {
+      "name": "dolphincoder:15b",
+      "id": "1102380927c2",
+      "size_gb": 9.1,
+      "size_label": "9,1 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 50676,
+        "prompt_eval_count": 62,
+        "eval_count": 31,
+        "prompt_eval_duration_ns": 251757853,
+        "eval_duration_ns": 944145698,
+        "total_duration_ns": 50667719595,
+        "load_duration_ns": 49471374998,
+        "tokens_per_second": 32.83
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-dolphincoder_15b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/dolphincoder_15b.json",
+      "last_test_at": "2026-04-11T20:56:34Z"
+    },
+    {
+      "name": "yi-coder:9b",
+      "id": "39c63e7675d7",
+      "size_gb": 5.0,
+      "size_label": "5,0 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 28444,
+        "prompt_eval_count": 54,
+        "eval_count": 47,
+        "prompt_eval_duration_ns": 168852976,
+        "eval_duration_ns": 853996811,
+        "total_duration_ns": 28436052503,
+        "load_duration_ns": 27412767519,
+        "tokens_per_second": 55.04
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-yi-coder_9b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/yi-coder_9b.json",
+      "last_test_at": "2026-04-11T20:57:02Z"
+    },
+    {
+      "name": "codegemma:7b",
+      "id": "0c96700aaada",
+      "size_gb": 5.0,
+      "size_label": "5,0 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 27187,
+        "prompt_eval_count": 56,
+        "eval_count": 43,
+        "prompt_eval_duration_ns": 211545483,
+        "eval_duration_ns": 774406736,
+        "total_duration_ns": 27175682620,
+        "load_duration_ns": 26185641060,
+        "tokens_per_second": 55.53
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-codegemma_7b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/codegemma_7b.json",
+      "last_test_at": "2026-04-11T20:57:30Z"
+    },
+    {
+      "name": "opencoder:8b",
+      "id": "cd882db52297",
+      "size_gb": 4.7,
+      "size_label": "4,7 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "gdscript",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 17640,
+        "prompt_eval_count": 57,
+        "eval_count": 33,
+        "prompt_eval_duration_ns": 184356241,
+        "eval_duration_ns": 520677135,
+        "total_duration_ns": 17631230738,
+        "load_duration_ns": 16925435291,
+        "tokens_per_second": 63.38
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-opencoder_8b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/opencoder_8b.json",
+      "last_test_at": "2026-04-11T20:57:48Z"
+    },
+    {
+      "name": "dolphincoder:7b",
+      "id": "677555f1f316",
+      "size_gb": 4.2,
+      "size_label": "4,2 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 24461,
+        "prompt_eval_count": 62,
+        "eval_count": 38,
+        "prompt_eval_duration_ns": 144900218,
+        "eval_duration_ns": 647091544,
+        "total_duration_ns": 24452642640,
+        "load_duration_ns": 23651188400,
+        "tokens_per_second": 58.72
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-dolphincoder_7b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/dolphincoder_7b.json",
+      "last_test_at": "2026-04-11T20:58:12Z"
+    },
+    {
+      "name": "starcoder2:7b",
+      "id": "1550ab21b10d",
+      "size_gb": 4.0,
+      "size_label": "4,0 GB",
+      "release_year": 2024,
+      "group": "code_generation",
+      "status": "syntax_issue",
+      "last_test": "2026-04-11",
+      "notes": "empty response",
+      "issues": [
+        "empty_response"
+      ],
+      "tags": [
+        "code",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": false,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 21818,
+        "prompt_eval_count": 45,
+        "eval_count": 2,
+        "prompt_eval_duration_ns": 146075174,
+        "eval_duration_ns": 18521452,
+        "total_duration_ns": 21810274032,
+        "load_duration_ns": 21645231000,
+        "tokens_per_second": 107.98
+      },
+      "last_kind": "csharp",
+      "last_result": "fail",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-starcoder2_7b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/starcoder2_7b.json",
+      "last_test_at": "2026-04-11T20:58:34Z"
+    },
+    {
+      "name": "deepseek-r1:14b",
+      "id": "c333b7232bdb",
+      "size_gb": 9.0,
+      "size_label": "9,0 GB",
+      "release_year": 2024,
+      "group": "reasoning",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains reasoning tags",
+      "issues": [
+        "reasoning_tags"
+      ],
+      "tags": [
+        "reasoning",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 40797,
+        "prompt_eval_count": 34,
+        "eval_count": 317,
+        "prompt_eval_duration_ns": 330643739,
+        "eval_duration_ns": 9586292884,
+        "total_duration_ns": 40785937129,
+        "load_duration_ns": 30868521748,
+        "tokens_per_second": 33.07
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-deepseek-r1_14b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/deepseek-r1_14b.json",
+      "last_test_at": "2026-04-11T20:59:15Z"
+    },
+    {
+      "name": "phi4:14b",
+      "id": "ac896e5b8b34",
+      "size_gb": 9.1,
+      "size_label": "9,1 GB",
+      "release_year": 2024,
+      "group": "reasoning",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "reasoning",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 29641,
+        "prompt_eval_count": 41,
+        "eval_count": 29,
+        "prompt_eval_duration_ns": 287979508,
+        "eval_duration_ns": 826418548,
+        "total_duration_ns": 29623379937,
+        "load_duration_ns": 28499745056,
+        "tokens_per_second": 35.09
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-phi4_14b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/phi4_14b.json",
+      "last_test_at": "2026-04-11T20:59:45Z"
+    },
+    {
+      "name": "qwen3:14b",
+      "id": "bdbd181c33f2",
+      "size_gb": 9.3,
+      "size_label": "9,3 GB",
+      "release_year": 2024,
+      "group": "general",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains reasoning tags",
+      "issues": [
+        "reasoning_tags"
+      ],
+      "tags": [
+        "general",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 43782,
+        "prompt_eval_count": 39,
+        "eval_count": 452,
+        "prompt_eval_duration_ns": 310458285,
+        "eval_duration_ns": 13320323930,
+        "total_duration_ns": 43723689452,
+        "load_duration_ns": 30083276476,
+        "tokens_per_second": 33.93
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-qwen3_14b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/qwen3_14b.json",
+      "last_test_at": "2026-04-11T21:00:29Z"
+    },
+    {
+      "name": "llama3:latest",
+      "id": "365c0bd3c000",
+      "size_gb": 4.7,
+      "size_label": "4,7 GB",
+      "release_year": 2024,
+      "group": "general",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "pass",
+      "issues": [],
+      "tags": [
+        "general",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": true
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 28457,
+        "prompt_eval_count": 41,
+        "eval_count": 31,
+        "prompt_eval_duration_ns": 129724865,
+        "eval_duration_ns": 463913645,
+        "total_duration_ns": 28448153077,
+        "load_duration_ns": 27854075970,
+        "tokens_per_second": 66.82
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-llama3_latest",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/llama3_latest.json",
+      "last_test_at": "2026-04-11T21:00:58Z"
+    },
+    {
+      "name": "dolphin3:8b",
+      "id": "d5ab9ae8e1f2",
+      "size_gb": 4.9,
+      "size_label": "4,9 GB",
+      "release_year": 2024,
+      "group": "general",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "general",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 20021,
+        "prompt_eval_count": 54,
+        "eval_count": 29,
+        "prompt_eval_duration_ns": 183661388,
+        "eval_duration_ns": 476268872,
+        "total_duration_ns": 20003844608,
+        "load_duration_ns": 19343478713,
+        "tokens_per_second": 60.89
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-dolphin3_8b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/dolphin3_8b.json",
+      "last_test_at": "2026-04-11T21:01:18Z"
+    },
+    {
+      "name": "dolphin-mistral:7b",
+      "id": "5dc8c5a2be65",
+      "size_gb": 4.1,
+      "size_label": "4,1 GB",
+      "release_year": 2024,
+      "group": "general",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "pass",
+      "issues": [],
+      "tags": [
+        "general",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": true
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 23732,
+        "prompt_eval_count": 65,
+        "eval_count": 39,
+        "prompt_eval_duration_ns": 290903590,
+        "eval_duration_ns": 569168722,
+        "total_duration_ns": 23723392406,
+        "load_duration_ns": 22862935959,
+        "tokens_per_second": 68.52
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-dolphin-mistral_7b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/dolphin-mistral_7b.json",
+      "last_test_at": "2026-04-11T21:01:42Z"
+    },
+    {
+      "name": "mistral:7b",
+      "id": "6577803aa9a0",
+      "size_gb": 4.4,
+      "size_label": "4,4 GB",
+      "release_year": 2023,
+      "group": "general",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "pass",
+      "issues": [],
+      "tags": [
+        "general",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": true
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 17264,
+        "prompt_eval_count": 41,
+        "eval_count": 49,
+        "prompt_eval_duration_ns": 174289036,
+        "eval_duration_ns": 730295115,
+        "total_duration_ns": 17255938742,
+        "load_duration_ns": 16350934364,
+        "tokens_per_second": 67.1
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-mistral_7b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/mistral_7b.json",
+      "last_test_at": "2026-04-11T21:01:59Z"
+    },
+    {
+      "name": "llama2:latest",
+      "id": "78e26419b446",
+      "size_gb": 3.8,
+      "size_label": "3,8 GB",
+      "release_year": 2023,
+      "group": "general",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "general",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 21619,
+        "prompt_eval_count": 57,
+        "eval_count": 44,
+        "prompt_eval_duration_ns": 146326646,
+        "eval_duration_ns": 584661204,
+        "total_duration_ns": 21610689225,
+        "load_duration_ns": 20879291989,
+        "tokens_per_second": 75.26
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-llama2_latest",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/llama2_latest.json",
+      "last_test_at": "2026-04-11T21:02:21Z"
+    },
+    {
+      "name": "gemma3n:e4b",
+      "id": "15cb39fd9394",
+      "size_gb": 7.5,
+      "size_label": "7,5 GB",
+      "release_year": 2024,
+      "group": "edge",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "pass",
+      "issues": [],
+      "tags": [
+        "edge",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": true
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 9954,
+        "prompt_eval_count": 53,
+        "eval_count": 37,
+        "prompt_eval_duration_ns": 1089723979,
+        "eval_duration_ns": 1487491879,
+        "total_duration_ns": 9880685085,
+        "load_duration_ns": 7300067258,
+        "tokens_per_second": 24.87
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-gemma3n_e4b",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/gemma3n_e4b.json",
+      "last_test_at": "2026-04-11T21:02:31Z"
+    },
+    {
+      "name": "gemma3:latest",
+      "id": "a2af6cc3eb7f",
+      "size_gb": 3.3,
+      "size_label": "3,3 GB",
+      "release_year": 2024,
+      "group": "edge",
+      "status": "ok",
+      "last_test": "2026-04-11",
+      "notes": "contains markdown fences",
+      "issues": [
+        "markdown_fences"
+      ],
+      "tags": [
+        "edge",
+        "csharp",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": true,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 4223,
+        "prompt_eval_count": 43,
+        "eval_count": 45,
+        "prompt_eval_duration_ns": 504083951,
+        "eval_duration_ns": 705155138,
+        "total_duration_ns": 4193854839,
+        "load_duration_ns": 2984190753,
+        "tokens_per_second": 63.82
+      },
+      "last_kind": "csharp",
+      "last_result": "pass",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-gemma3_latest",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/gemma3_latest.json",
+      "last_test_at": "2026-04-11T21:02:36Z"
+    },
+    {
+      "name": "deepseek-ocr:latest",
+      "id": "0e7b018b8a22",
+      "size_gb": 6.7,
+      "size_label": "6,7 GB",
+      "release_year": 2024,
+      "group": "specialized",
+      "status": "load_failed",
+      "last_test": "2026-04-11",
+      "notes": "HTTP 500 during generate request",
+      "issues": [
+        "http_500"
+      ],
+      "tags": [
+        "ocr",
+        "specialized",
+        "local"
+      ],
+      "tested_kinds": [
+        "csharp"
+      ],
+      "agent_selection": {
+        "auto_select": false,
+        "strict_code_only_safe": false
+      },
+      "last_profile": "smoke-csharp",
+      "metrics": {
+        "last_duration_ms": 175,
+        "prompt_eval_count": null,
+        "eval_count": null,
+        "prompt_eval_duration_ns": null,
+        "eval_duration_ns": null,
+        "total_duration_ns": null,
+        "load_duration_ns": null,
+        "tokens_per_second": null
+      },
+      "last_kind": "csharp",
+      "last_result": "fail",
+      "last_run_id": "batch-20260411T205207922Z-smoke-csharp-deepseek-ocr_latest",
+      "last_run_log": "ollama-tooling/runs/batch/batch-20260411T205207922Z-smoke-csharp/deepseek-ocr_latest.json",
+      "last_test_at": "2026-04-11T21:02:36Z"
+    }
+  ]
+}
