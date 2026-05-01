@@ -1,0 +1,20 @@
+bin/
+obj/
+
+
+# Godot
+**/minimum-lsp-project/.godot/
+**/minimum-lsp-project/*.import
+**/minimum-lsp-project/export_presets.cfg
+.exports/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+.github/hooks/logs/
+.export/**/*
