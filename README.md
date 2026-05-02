@@ -1,10 +1,6 @@
 # godot-lsp-bridge
 
-A stdio ↔ TCP bridge for Godot's GDScript Language Server, written in C# as a self-contained native binary.
-
-## Why?
-
-AI coding tools (GitHub Copilot CLI, Claude Code, Cursor, etc.) expect LSP servers to communicate via **stdio**. Godot's LSP only supports **TCP** (port 6005). This bridge sits between the two.
+stdio ↔ TCP Bridge für Godots GDScript Language Server. Ermöglicht die Verwendung von Godots LSP mit AI Coding Tools wie GitHub Copilot CLI, Claude Code oder Cursor.
 
 ```
 ┌─────────────┐   stdio   ┌──────────────────┐   TCP    ┌─────────────┐
@@ -15,64 +11,46 @@ AI coding tools (GitHub Copilot CLI, Claude Code, Cursor, etc.) expect LSP serve
 
 ## Features
 
-- stdio ↔ TCP bridging
-- Auto port discovery (tries 6005, 6007, 6008)
-- Initialize-notification buffering (fixes Godot's non-standard LSP ordering)
-- Auto-reconnect when Godot restarts
-- Windows file URI normalization
-- 10 MB buffer limit against memory exhaustion
-- No runtime dependency — single native binary via NativeAOT
+- stdio ↔ TCP Bridging
+- Automatische Port-Erkennung (probiert 6005, 6007, 6008)
+- Initialize-Notification Pufferung (Workaround für Godots nicht-standardkonformes LSP-Verhalten)
+- Auto-Reconnect bei Neustart von Godot
+- Windows File URI Normalisierung
+- 10 MB Buffer-Limit (Schutz gegen Speicherüberlastung)
+- Keine Runtime-Abhängigkeit — einzelne native Binary via NativeAOT (C#)
 
-## Requirements
+## Voraussetzungen
 
-- **Godot Editor** must be running with your project open (the LSP server is only active in the editor)
+- **Godot Editor** muss laufen mit geöffnetem Projekt (der LSP-Server ist nur im Editor aktiv)
+- **.NET 10 SDK** (nur für den Build — die fertige Binary läuft ohne .NET Runtime)
 
-## Build
+## Installation
 
 ```bash
-# Debug build
-dotnet build
-
-# Self-contained native binary (Linux x64)
-dotnet publish -r linux-x64 -c Release
-
-# Self-contained native binary (Windows x64)
-dotnet publish -r win-x64 -c Release
+# Binary lokal verfügbar machen (Linux)
+cp bin/Release/net10.0/linux-x64/publish/godot-lsp-bridge ~/.local/bin/
+# oder: sudo cp ... /usr/local/bin/
 ```
 
-The binary is placed in `bin/Release/net10.0/<rid>/publish/godot-lsp-bridge`.
+Die Binary ist selbst-enthalten — kein .NET Runtime nötig.
 
-## Configuration
+## Verwendung
 
-### GitHub Copilot CLI (`lsp.json`)
+Die Bridge wird nicht direkt aufgerufen, sondern über die Konfiguration des AI Tools eingebunden.
+Die Bridge startet und verbindet sich automatisch mit dem laufenden Godot Editor.
 
-```json
-{
-  "lspServers": {
-    "godot": {
-      "command": "/path/to/godot-lsp-bridge",
-      "args": [],
-      "fileExtensions": {
-        ".gd": "GDScript",
-        ".tscn": "GD Scene",
-        ".tres": "GD Text Resource"
-      },
-      "rootUri": "godot_towns/"
-    }
-  }
-}
+Schnelltest:
+```bash
+echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' | godot-lsp-bridge
 ```
 
-### Environment Variables
+## Dokumentation
 
-| Variable | Default | Description |
-|---|---|---|
-| `GODOT_LSP_PORT` | auto-discover | Fix to a specific port |
-| `GODOT_LSP_HOST` | `127.0.0.1` | Godot LSP host |
-| `GODOT_LSP_BRIDGE_DEBUG` | `false` | Enable debug logging |
-| `GODOT_LSP_BRIDGE_LOG` | `/tmp/godot-lsp-bridge.log` | Log file path |
+- [Build-Anleitung & Deployment](docs/usage.md)
+- [Konfiguration (lsp.json, Umgebungsvariablen)](docs/configuration.md)
 
-## Acknowledgements
+## Part of godot-dev-toolkit
 
-Inspired by [godot-lsp-stdio-bridge](https://github.com/code-xhyun/godot-lsp-stdio-bridge) by code-xhyun (MIT).  
-The original Node.js implementation served as the reference for the LSP framing logic and Godot's non-standard initialize ordering.
+Dieses Tool ist Teil des [godot-dev-toolkit](https://github.com/Fox-Alpha/godot-dev-toolkit) Hubs.
+
+Inspired by [godot-lsp-stdio-bridge](https://github.com/code-xhyun/godot-lsp-stdio-bridge) by code-xhyun (MIT).
