@@ -1,51 +1,65 @@
-# Export GUI (PySimpleGUI)
+# godot-export-gui
 
-Kurzes Scaffold zum Exportieren von Godot‑Projekten mit einer kleinen GUI.
+Kleine GUI zum Exportieren von Godot-Projekten — gebaut mit PySimpleGUI.
 
-Installation:
+## Features
+
+- Projektordner auswählen und Godot-Binary angeben
+- Export-Profil und Build-Typ wählen (`export-debug` / `export-release`)
+- Konfiguration pro Projekt in `.export_config.json` speichern
+- Ressourcen-Import und Export per Godot-CLI ausführen
+- Godot-Binaries im System suchen (`Scan Engines`, `Scan Folder`)
+- Versionsprüfung mit `Probe Versions`
+- Export-Pfad automatisch aus `export_presets.cfg` lesen (`Auto Set Export Folder`)
+
+## Voraussetzungen
+
+- **Python 3.8+**
+- **PySimpleGUI** (spezielle Installation erforderlich — privater PyPI-Index)
+- **Godot Engine 4.x**
+
+## Installation
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+
+# PySimpleGUI vom offiziellen Index installieren
+python -m pip uninstall PySimpleGUI -y 2>/dev/null || true
+python -m pip install --upgrade --extra-index-url https://PySimpleGUI.net/install PySimpleGUI
+
 pip install -r requirements.txt
 ```
 
-Benutzung:
-- `export_gui.py` starten
-- Projektordner auswählen, Godot‑Binary angeben, Profil/Type wählen
-- Auf `Save Config` drücken speichert `.export_config.json` im Projektordner
-- `Import` und `Export` führen die entsprechenden Godot‑CLI Befehle aus und schreiben Logs in den Export‑Ordner
-
-Engine‑Management:
-- Mit `Scan Engines` sucht das Tool nach installierten Godot‑Binaries (PATH und üblichen Orte).
-- Gefundene Engines werden in der Combobox angezeigt; per `Save Engine` lassen sie sich persistent speichern unter `~/.config/godot_export_gui/engines.json`.
-
-Neue Optionen:
-- `Probe Versions`: Läuft `--version` für gefundene Binaries und zeigt Versionen in der Liste an.
-- `Scan Folder`: Ermöglicht manuelles Durchsuchen eines angegebenen Ordners nach Godot‑Binaries.
-- `Auto Set Export Folder`: Liest `export_presets.cfg` im Projekt und setzt den Export‑Ordner basierend auf dem gewählten Profil.
-
-Konfiguration:
-- Per‑Project Konfiguration wird in `.export_config.json` im Projektordner gespeichert.
-- Globale Engine‑Liste wird unter `~/.config/godot_export_gui/engines.json` verwaltet.
-
-Schnellstart:
+## Verwendung
 
 ```bash
-python3 -m venv .venv
 source .venv/bin/activate
-# PySimpleGUI is served from a private PyPI index. Recommended install steps:
-python -m pip uninstall PySimpleGUI -y || true
-python -m pip cache purge || true
-python -m pip install --upgrade --extra-index-url https://PySimpleGUI.net/install PySimpleGUI
-pip install -r export_gui/requirements.txt
-python export_gui/export_gui.py
+python export_gui.py
 ```
 
----
+1. Projektordner auswählen
+2. Godot-Binary angeben (oder per `Scan Engines` suchen)
+3. Profil und Build-Typ wählen
+4. `Save Config` — speichert `.export_config.json` im Projektordner
+5. `Import` — Godot-Ressourcen importieren
+6. `Export` — Projekt exportieren (Logs im Export-Ordner)
+
+Detaillierte Bedienung → [docs/usage.md](docs/usage.md)
+
+## Konfiguration
+
+| Datei | Speicherort | Inhalt |
+|---|---|---|
+| `.export_config.json` | Projektordner | Projektspezifische Export-Einstellungen |
+| `engines.json` | `~/.config/godot_export_gui/` | Globale Engine-Liste |
+
+## Dokumentation
+
+- [docs/usage.md](docs/usage.md) — Bedienung, Engine-Verwaltung, Konfigurationsformat
 
 ## Part of godot-dev-toolkit
 
-Dieses Tool ist Teil des [godot-dev-toolkit](https://github.com/Fox-Alpha/godot-dev-toolkit) Hubs — einer Sammlung von Godot-Entwicklungstools.
+Dieses Tool ist Teil des [godot-dev-toolkit](https://github.com/Fox-Alpha/godot-dev-toolkit) — einer Sammlung von Entwicklungswerkzeugen für Godot-Projekte.
 
-> **Hinweis:** Dieses Tool (PySimpleGUI) gilt als abgeschlossen. Eine Neuentwicklung mit C#/Avalonia ist als eigenständiges Projekt unter [godot-export-app](https://github.com/Fox-Alpha/godot-export-app) geplant.
+> **Hinweis:** Dieses Tool gilt als feature-complete. Eine Neuentwicklung mit C#/Avalonia ist unter [godot-export-app](https://github.com/Fox-Alpha/godot-export-app) geplant.
